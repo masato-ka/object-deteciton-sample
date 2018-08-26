@@ -1,11 +1,11 @@
-package objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.objectdetection;
+package ka.masato.library.ai.ssddetection;
 
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.util.Log;
-import objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.objectdetection.exception.UninitializedBufferException;
+import ka.masato.library.ai.ssddetection.exception.UninitializedBufferException;
 
 import java.io.*;
 import java.nio.ByteBuffer;

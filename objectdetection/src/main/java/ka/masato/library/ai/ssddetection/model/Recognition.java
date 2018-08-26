@@ -1,4 +1,4 @@
-package objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.objectdetection.model;
+package ka.masato.library.ai.ssddetection.model;
 
 import android.graphics.RectF;
 

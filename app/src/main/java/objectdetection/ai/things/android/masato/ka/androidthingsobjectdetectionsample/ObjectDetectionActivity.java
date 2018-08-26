@@ -11,14 +11,14 @@ import android.util.Log;
 import com.google.android.things.pio.Gpio;
 import com.google.android.things.pio.GpioCallback;
 import com.google.android.things.pio.PeripheralManager;
+import ka.masato.library.ai.ssddetection.MultiObjectDetector;
+import ka.masato.library.ai.ssddetection.exception.FailedInitializeDetectorException;
+import ka.masato.library.ai.ssddetection.exception.UnInitializeDetectorException;
+import ka.masato.library.ai.ssddetection.model.Recognition;
 import objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.camera.CameraController;
 import objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.camera.ImagePreprocessor;
 import objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.camera.exception.FailedCaptureImageException;
 import objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.camera.exception.NoCameraFoundException;
-import objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.objectdetection.MultiObjectDetector;
-import objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.objectdetection.exception.FailedInitializeDetectorException;
-import objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.objectdetection.exception.UnInitializeDetectorException;
-import objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.objectdetection.model.Recognition;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -127,7 +127,8 @@ public class ObjectDetectionActivity extends Activity {
         public void onImageAvailable(ImageReader imageReader) {
             try {
                 final Bitmap cropedImage = mImagePreprocessor.preprocessImage(imageReader.acquireLatestImage());
-                final ArrayList<Recognition> result = mMultiObjectDetector.runDetection(cropedImage, 10);
+                ArrayList<Recognition> result;
+                result = mMultiObjectDetector.runDetection(cropedImage, 10);
                 mCanvasView.setmBitmap(cropedImage);
                 mCanvasView.setRecognitions(result);
                 mCanvasView.invalidate();

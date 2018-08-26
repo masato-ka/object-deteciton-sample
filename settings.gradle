@@ -1,1 +1,1 @@
-include ':app', ':touch'
+include ':app', ':objectdetection', ':camera'

@@ -7,7 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
-import objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.objectdetection.model.Recognition;
+import ka.masato.library.ai.ssddetection.model.Recognition;
 
 import java.util.ArrayList;
 

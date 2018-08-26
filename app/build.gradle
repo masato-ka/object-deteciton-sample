@@ -16,6 +16,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
     sourceSets {
         main {
             assets.srcDirs = ['./src/main/assets']
@@ -24,6 +25,7 @@ android {
     aaptOptions {
         noCompress "tflite"
     }
+
 }
 
 // import DownloadModels task
@@ -34,6 +36,7 @@ project.ext.TMP_DIR   = project.buildDir.toString() + '/downloads'
 // place them in the "assets" directory and comment out this line.
 apply from: "download-models.gradle"
 
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
@@ -42,4 +45,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'org.tensorflow:tensorflow-lite:1.9.0'
     compileOnly 'com.google.android.things:androidthings:+'
+    implementation project(path: ':objectdetection')
+    implementation project(path: ':camera')
 }

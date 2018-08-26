@@ -1,4 +1,4 @@
-package objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.objectdetection.exception;
+package ka.masato.library.ai.ssddetection.exception;
 
 public class FailedInitializeDetectorException extends Exception {
 

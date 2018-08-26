@@ -1,16 +1,17 @@
-package objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.objectdetection;
+package ka.masato.library.ai.ssddetection;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.RectF;
-import objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.objectdetection.exception.FailedInitializeDetectorException;
-import objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.objectdetection.exception.UnInitializeDetectorException;
-import objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.objectdetection.exception.UnmalformedInputImageException;
-import objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.objectdetection.model.Recognition;
+import ka.masato.library.ai.ssddetection.exception.FailedInitializeDetectorException;
+import ka.masato.library.ai.ssddetection.exception.UnInitializeDetectorException;
+import ka.masato.library.ai.ssddetection.exception.UnmalformedInputImageException;
+import ka.masato.library.ai.ssddetection.model.Recognition;
 import org.tensorflow.lite.Interpreter;
 
 import java.io.IOException;
-import java.nio.*;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -65,7 +66,7 @@ public class MultiObjectDetector {
         label = TensorFlowHelper.loadLabelFile(context, labelFilePath);
     }
 
-    public ArrayList<Recognition>runDetection(Bitmap bitmap, int numDetection)
+    public ArrayList<Recognition> runDetection(Bitmap bitmap, int numDetection)
             throws UnInitializeDetectorException {
 
         if(mTensorFlowLite ==null) {
@@ -82,7 +83,6 @@ public class MultiObjectDetector {
         Object[] inputArray = {imgData};
         mTensorFlowLite.runForMultipleInputsOutputs(inputArray, outputData);
         ArrayList<Recognition> result = formatResult(outputData, numDetection);
-
         return result;
     }
 
