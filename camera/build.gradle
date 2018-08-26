@@ -1,4 +1,20 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+
+def versionMajor = 0
+def versionMinor = 1
+def versionPatch = 0
+
+group 'ka.masato.library.device'
+archivesBaseName = 'camera'
+version "${versionMajor}.${versionMinor}.${versionPatch}"
+
+def libraryId = 'camera'
+def siteUrl = 'https://github.com/masato-ka/object-deteciton-sample'
+def githubUrl = 'https://github.com/masato-ka/object-deteciton-sample'
+
 
 android {
     compileSdkVersion 26
@@ -9,7 +25,7 @@ android {
         minSdkVersion 26
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0"
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -34,4 +50,50 @@ dependencies {
     })
     compileOnly 'com.google.android.things:androidthings:+'
 
+}
+
+bintray {
+    user = project.hasProperty('bintray_user') ? bintray_user : ''
+    key = project.hasProperty('bintray_key') ? bintray_key : ''
+    configurations = ['archives']
+
+    pkg {
+        repo = 'android-things-support'
+        name = project.group + '.' + libraryId
+        licenses = ['MIT']
+        websiteUrl = siteUrl
+        issueTrackerUrl = githubUrl + '/blob/master/LICENSE'
+        vcsUrl = githubUrl + '.git'
+        issueTrackerUrl = githubUrl + '/issues'
+        publicDownloadNumbers = true
+        version {
+            name = project.version
+        }
+    }
+}
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            name libraryId
+            url siteUrl
+
+            packaging 'aar'
+            groupId project.group
+            artifactId libraryId
+            version project.version
+
+            licenses {
+                license {
+                    name 'The MIT License'
+                    url 'https://opensource.org/licenses/MIT'
+                    distribution 'repo'
+                }
+            }
+            scm {
+                connection githubUrl + '.git'
+                url githubUrl
+            }
+        }
+    }
 }
