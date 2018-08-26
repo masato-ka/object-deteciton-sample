@@ -11,7 +11,7 @@ group 'ka.masato.library.ai'
 archivesBaseName = 'ssddetection'
 version "${versionMajor}.${versionMinor}.${versionPatch}"
 
-def libraryId = 'ssddeteciton'
+def libraryId = 'ssddetection'
 def siteUrl = 'https://github.com/masato-ka/object-deteciton-sample'
 def githubUrl = 'https://github.com/masato-ka/object-deteciton-sample'
 
