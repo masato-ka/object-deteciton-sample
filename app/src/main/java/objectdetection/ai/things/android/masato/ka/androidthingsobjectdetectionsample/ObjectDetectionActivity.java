@@ -15,10 +15,10 @@ import ka.masato.library.ai.ssddetection.MultiObjectDetector;
 import ka.masato.library.ai.ssddetection.exception.FailedInitializeDetectorException;
 import ka.masato.library.ai.ssddetection.exception.UnInitializeDetectorException;
 import ka.masato.library.ai.ssddetection.model.Recognition;
-import objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.camera.CameraController;
-import objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.camera.ImagePreprocessor;
-import objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.camera.exception.FailedCaptureImageException;
-import objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.camera.exception.NoCameraFoundException;
+import ka.masato.library.device.camera.CameraController;
+import ka.masato.library.device.camera.ImagePreprocessor;
+import ka.masato.library.device.camera.exception.FailedCaptureImageException;
+import ka.masato.library.device.camera.exception.NoCameraFoundException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -52,6 +52,9 @@ public class ObjectDetectionActivity extends Activity {
 
     private Gpio mButton;
 
+    private Handler mLoopHandler;
+    private boolean isCapture = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +70,8 @@ public class ObjectDetectionActivity extends Activity {
         mCanvasView = findViewById(R.id.CanvasView);
 
         ButtonInitialize();
+
+        mLoopHandler = new Handler();
     }
 
     private void ButtonInitialize(){
@@ -112,10 +117,12 @@ public class ObjectDetectionActivity extends Activity {
     private GpioCallback shutterCallBack = new GpioCallback() {
         @Override
         public boolean onGpioEdge(Gpio gpio) {
-            try {
-                mCameraController.takePicture();
-            } catch (FailedCaptureImageException e) {
-                Log.e(LOG_TAG, "Failed take picture method.", e);
+            if (!isCapture) {
+                isCapture = true;
+                mLoopHandler.post(timerThread);
+            } else {
+                isCapture = false;
+                mLoopHandler.removeCallbacks(timerThread);
             }
             return true;
         }
@@ -136,6 +143,18 @@ public class ObjectDetectionActivity extends Activity {
             } catch (UnInitializeDetectorException e) {
                 Log.e(LOG_TAG, "Failed object detection.", e);
             }
+        }
+    };
+
+    private final Runnable timerThread = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                mCameraController.takePicture();
+            } catch (FailedCaptureImageException e) {
+                Log.e(LOG_TAG, "Failed capture camera image.", e);
+            }
+            mLoopHandler.postDelayed(this, 1000);
         }
     };
 

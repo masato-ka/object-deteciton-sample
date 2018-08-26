@@ -1,4 +1,4 @@
-package objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.camera.exception;
+package ka.masato.library.device.camera.exception;
 
 public class UnInitializeCameraException extends RuntimeException {
 

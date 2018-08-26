@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.camera;
+package ka.masato.library.device.camera;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;

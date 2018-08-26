@@ -1,4 +1,4 @@
-package objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.camera;
+package ka.masato.library.device.camera;
 
 import android.content.Context;
 import android.graphics.ImageFormat;
@@ -6,9 +6,9 @@ import android.hardware.camera2.*;
 import android.media.ImageReader;
 import android.os.Handler;
 import android.util.Log;
-import objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.camera.exception.FailedCaptureImageException;
-import objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.camera.exception.NoCameraFoundException;
-import objectdetection.ai.things.android.masato.ka.androidthingsobjectdetectionsample.camera.exception.UnInitializeCameraException;
+import ka.masato.library.device.camera.exception.FailedCaptureImageException;
+import ka.masato.library.device.camera.exception.NoCameraFoundException;
+import ka.masato.library.device.camera.exception.UnInitializeCameraException;
 
 import java.util.Collections;
 
