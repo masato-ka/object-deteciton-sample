@@ -55,8 +55,6 @@ public class ImagePreprocessor {
             cropAndRescaleBitmap(rgbFrameBitmap, croppedBitmap, 0);
         }
 
-        image.close();
-
         // For debugging
         if (SAVE_PREVIEW_BITMAP) {
             saveBitmap(croppedBitmap);
