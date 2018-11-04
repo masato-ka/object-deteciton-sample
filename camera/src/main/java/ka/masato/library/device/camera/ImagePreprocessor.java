@@ -43,6 +43,17 @@ public class ImagePreprocessor {
         this.rgbFrameBitmap = Bitmap.createBitmap(previewWidth, previewHeight, Config.ARGB_8888);
     }
 
+    public Bitmap convertImage2Bitmap(Image image) {
+        if (image == null) {
+            return null;
+        }
+        ByteBuffer bb = image.getPlanes()[0].getBuffer();
+        if (rgbFrameBitmap != null) {
+            rgbFrameBitmap = BitmapFactory.decodeStream(new ByteBufferBackedInputStream(bb));
+        }
+        return rgbFrameBitmap;
+    }
+
     public Bitmap preprocessImage(final Image image) {
         if (image == null) {
             return null;
