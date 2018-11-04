@@ -51,7 +51,12 @@ public class ImagePreprocessor {
         if (rgbFrameBitmap != null) {
             rgbFrameBitmap = BitmapFactory.decodeStream(new ByteBufferBackedInputStream(bb));
         }
-        return rgbFrameBitmap;
+
+        //Why do not know, when using canvas very fast show.
+        Matrix matrix = new Matrix();
+        Canvas canvas = new Canvas(croppedBitmap);
+        canvas.drawBitmap(rgbFrameBitmap, matrix, null);
+        return croppedBitmap;
     }
 
     public Bitmap preprocessImage(final Image image) {
