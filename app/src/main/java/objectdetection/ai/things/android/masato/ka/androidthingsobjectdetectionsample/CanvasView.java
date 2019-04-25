@@ -46,7 +46,7 @@ public class CanvasView extends View {
             paint.setColor(Color.GREEN);
             for(int i = 0; i < recognitions.size(); i++){
                 Recognition mRecognition = recognitions.get(i);
-                if (mRecognition.getConfidence() < 0.5) {
+                if (mRecognition.getConfidence() < 0.3) {
                     continue;
                 }
                 canvas.drawText(mRecognition.getTitle(),

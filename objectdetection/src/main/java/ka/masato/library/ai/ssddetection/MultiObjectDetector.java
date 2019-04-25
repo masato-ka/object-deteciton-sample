@@ -17,6 +17,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author kawamuramasato
+ * @author
+ * @since 2018/08/29
+ */
 public class MultiObjectDetector {
 
     private static final String LOG_TAG = "MultiObjectDetector";
@@ -59,7 +64,7 @@ public class MultiObjectDetector {
     }
 
     private void loadModel(Context context, String modelFilePath) throws IOException {
-            mTensorFlowLite = new Interpreter(TensorFlowHelper.loadModelFile(context, modelFilePath));
+        mTensorFlowLite = new Interpreter(TensorFlowHelper.loadModelFile(context, modelFilePath));
     }
 
     private void loadLabel(Context context, String labelFilePath) throws IOException {
@@ -133,7 +138,6 @@ public class MultiObjectDetector {
 
         return recognitions;
     }
-
 
 
 }

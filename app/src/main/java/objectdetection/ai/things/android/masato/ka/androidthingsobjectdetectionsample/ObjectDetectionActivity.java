@@ -3,6 +3,7 @@ package objectdetection.ai.things.android.masato.ka.androidthingsobjectdetection
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.hardware.camera2.CameraAccessException;
+import android.media.Image;
 import android.media.ImageReader;
 import android.os.Bundle;
 import android.os.Handler;
@@ -72,6 +73,7 @@ public class ObjectDetectionActivity extends Activity {
         ButtonInitialize();
 
         mLoopHandler = new Handler();
+        mLoopHandler.post(timerThread);
     }
 
     private void ButtonInitialize(){
@@ -133,12 +135,14 @@ public class ObjectDetectionActivity extends Activity {
         @Override
         public void onImageAvailable(ImageReader imageReader) {
             try {
-                final Bitmap cropedImage = mImagePreprocessor.preprocessImage(imageReader.acquireLatestImage());
+                Image image = imageReader.acquireLatestImage();
+                final Bitmap cropedImage = mImagePreprocessor.preprocessImage(image);
                 ArrayList<Recognition> result;
                 result = mMultiObjectDetector.runDetection(cropedImage, 10);
                 mCanvasView.setmBitmap(cropedImage);
                 mCanvasView.setRecognitions(result);
                 mCanvasView.invalidate();
+                image.close();
                 Log.d(LOG_TAG, "result" + result.toString());
             } catch (UnInitializeDetectorException e) {
                 Log.e(LOG_TAG, "Failed object detection.", e);
